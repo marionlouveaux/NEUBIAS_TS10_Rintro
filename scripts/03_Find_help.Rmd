@@ -1,0 +1,67 @@
+---
+title: "03_Find_help"
+author: "Marion Louveaux"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## From R/Rstudio
+
+### For a whole package
+
+The command below gives access to the documentation of the whole package. You can look for a specific function (by alphabetical order) or open the "User guides, Vignettes and other documentation".
+
+```{r}
+help(package = "dplyr")
+```
+
+Vignettes are small tutorials introducing the key functions of the package. For instance, have a look at the vignette of the dplyr package that gives an "Introduction to dplyr" (click on "HTML"). 
+
+### For a specific function
+
+Each function has an associated help page that can be accessed by adding a question mark before the name of the function. The help page describes the function, its arguments, and gives some examples on how to use it. Note that some function names correspond to several function from different package (for instance, select, filter and mutate). You will have to choose between the different propositions.      
+
+Try the commands below:          
+```{r}
+?group_by
+
+?select
+```
+
+### Cheatsheets
+
+In the Rstudio menu, in `Help -> Cheatsheets`, you will find detailed cheatsheets for the packages dplyr, ggplot2 and for Rmarkdown.        
+
+## Online
+
+Google:         
+- google your error messages. Remove any specific information (name of your variables...).       
+- google packages names, and function names. When googling R, google "R project", or "R cran", rather than the letter "R" alone.             
+For instance: "R project dplyr" or "R cran dplyr", or "R project dplyr select".     
+
+Stack overflow:
+Stack overflow is a public forum where you can post questions related to code issues. You can also search through the already asked questions, as common issues are usually already answered there. If you want to post a question, to maximise the chances to get an answer:         
+- check first that it hasn't already been at least partially answered somewhere else on stack overflow or on another website (if yes, you need to explain why this doesn't help you)        
+- make sure to include all necessary keywords       
+- give a **reprex** = reproducible example = some short piece of code that will work on anyone's computer and that reproduce your issue                 
+- keep it short and be polite         
+
+
+
+## Within the R community
+
+Identify colleagues and friends that are also using R.          
+Connect with your local R meetups, UserR meetups, R ladies meetups (https://rladies.org/), and/or the R ladies remote group.       
+
+
+
+
+
+
+
+

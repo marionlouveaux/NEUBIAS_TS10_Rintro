@@ -1,0 +1,37 @@
+---
+title: "01_Rbasics"
+author: "Marion Louveaux"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Executing a command in a chunk
+
+Commands are executed by pressing ctrl+enter (or cmd+enter on Mac OSX).              
+Try on the chunk below. If you see the output below the chunk instead of in the console, please go to the preferences (next to the knit button) and tick "Chunk Output in Console".     
+
+```{r}
+10+12
+```
+
+## Storing a result in a variable
+
+Output from a command can be stored in a variable using the assignement symbol "<-", with the variable on the right. In the chunk below, we'll store a number (29) in a variable (my_age).
+
+```{r}
+my_age <- 29
+```
+
+Now just execute the line below to see the content of the variable my_age:    
+```{r}
+my_age
+```
+
+
+
+
+

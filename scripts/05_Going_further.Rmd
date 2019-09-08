@@ -1,0 +1,80 @@
+---
+title: "05_Going_further"
+author: "Marion Louveaux"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Don't forget to cite R and the packages you use
+
+```{r}
+citation(package = "mamut2r")
+```
+With Zotero (https://www.zotero.org/): copy the BibTeX entry in the clipboard, then in Zotero, go to File -> import from clipboard.
+
+Don't forget to cite R as well.
+
+
+## Extra ressources about R and image analysis
+
+A webinar on working with images in R: https://vimeo.com/301405941 (R Open Sci community call)         
+
+A few R packages that can be useful in bioimage analysis:       
+- momocs: geometric morphometrics (https://vbonhomme.github.io/Momocs/vignettes/Momocs_speed_dating.html)            
+- colocr: Co-localization analysis of fluorescence microscopy images  (https://ropensci.org/blog/2018/11/27/colocr/)          
+- Rvcg: manipulation of triangular meshes  
+
+## Extra ressources to learn more about R     
+
+An online book: R for Data Science, Garrett Grolemund and Hadley Wickham: https://r4ds.had.co.nz/
+
+A serie of tutorials with videos to get started with R (tidyverse, ggplot2, Rmarkdown...): https://rladiessydney.org/post/2018/11/01/ryouwithme/        
+
+A meetup from the R Ladies Sydney that was live streamed https://rladiessydney.org/post/2018/08/21/little-miss-tidyverse/, the corresponding GitHub repository (that inspired this course) https://github.com/rladiessydney/littlemisstidyverse and slides https://slides.com/djnavarro/tidyverse-for-beginners .
+
+For the french speakers, I also recommend having a look at the blog of Lise Vaudor and her awesome drawings to explain R http://perso.ens-lyon.fr/lise.vaudor/ 
+
+
+## To get inspired when making plots
+
+https://www.r-graph-gallery.com/      
+
+
+## Extra ressources about data analysis
+
+Here are two articles from a french company that I translated to english about data formatting and common mistakes in data visualisation:       
+https://rtask.thinkr.fr/blog/data-visualisation-pitfalls-how-to-avoid-barbarplots/      
+https://rtask.thinkr.fr/blog/the-ten-commandments-for-a-well-formatted-database/       
+
+
+## Extra ressources to get help
+
+https://stackoverflow.com/
+http://www.sthda.com/english/     
+All the R studio cheatsheets https://www.rstudio.com/resources/cheatsheets/   
+
+How to get help: https://masalmon.eu/2018/07/22/wheretogethelp/          
+
+The reprex R package, to produce reproducible example ("reprex") that you can share with others: https://reprex.tidyverse.org/      
+
+
+## To keep informed on what is going on in the R community
+
+This websites aggregate content from other blogs about R:       
+https://www.r-bloggers.com/        
+https://rweekly.org/        
+
+On Twitter, you can have a look at #rstats   
+
+
+## To join local or remote R groups
+
+UseR meetups: https://www.meetup.com             
+Rladies groups: https://rladies.org/                
+R ladies remote group (sign in form): https://twitter.us18.list-manage.com/subscribe?u=2ea47051e532678beaba00ee9&id=0d53e23281    
+French speaking R remote group "Grrr". To sign in: https://frama.link/r-grrr          

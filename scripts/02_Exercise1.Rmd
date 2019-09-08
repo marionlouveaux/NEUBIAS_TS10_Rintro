@@ -1,0 +1,205 @@
+---
+title: "02_Exercise1"
+author: "Marion Louveaux"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load additionnal librairies.
+
+By default, only a few packages are loaded in your R workspace. To load additionnal packages, you'll need the function library(). This function works only if the package is already installed. In case the package is not installed, or in case you made a typo in the name of an installed package, you should see an error message like "there is no package called [name-of-your-package]".    
+
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+library(magrittr)
+library(dplyr)
+library(readr)
+library(here)
+library(ggplot2)
+library(ggthemes)
+```
+
+I recommend to put the librairies you need for your script always at the top of your .Rmd, in a separate chunk.
+
+
+## Define a theme for the plots
+
+This part is optionnal, but it is recommended to customize the theme of the plots and keep the same theme all along the plots. Below is one proposition of theme.    
+
+```{r, eval=TRUE}
+# Define a personnal theme
+custom_plot_theme <- function(...){
+theme_bw() +
+theme(panel.grid = element_blank(),
+      axis.line = element_line(size = .7, color = "black"),
+axis.text = element_text(size = 11),
+axis.title = element_text(size = 12),
+legend.text = element_text(size = 11),
+legend.title = element_text(size = 12),
+legend.key.size = unit(0.4, "cm"),
+strip.text.x = element_text(size = 12, colour = "black", angle = 0),
+strip.text.y = element_text(size = 12, colour = "black", angle = 90))
+}
+```
+
+
+## Import a dataset     
+
+We will now load the "division_timelapse_spot_stats.csv" file (in /dataset/fly_embryo). The here() function ensures to have always a correct path, whatever the location of the R project folder.      
+
+Try typing here() only.
+```{r}
+here()
+```
+
+The read_csv from the library readr read csv files and render them as "tibble", a certain type of dataframe.       
+```{r}
+df_fly_spots <- read_csv(here("datasets/fly_embryo/division_timelapse_spot_stats.csv"))
+```
+
+## View
+
+Let's start by viewing the dataframe. The function head() displays only the 6 first rows.       
+```{r, eval=TRUE}
+# Preferred method, works with all sizes of dataframes
+df_fly_spots %>% 
+  head()
+```
+
+```{r, eval=FALSE}
+# Alternatively, to see the whole table (be careful with big dataframes!!)
+df_fly_spots %>% 
+  View()
+```
+df_fly_spots is a tibble (= a certain type of dataframe), with 22 columns and 11 269 rows. On a tibble, we can read the type of the variable in each column below the name of the column: int = integer, chr = character, and dbl = double.    
+
+## Mutate
+
+Let's create a column that contains the results of the computation of the coefficient of variation of the intensity (of fluorescence). The CV is the ratio of the standard deviation over the mean.   
+
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots %>% 
+  mutate(MISSING_PART) %>% 
+  select(MISSING_PART, MEAN_INTENSITY, STANDARD_DEVIATION) %>% 
+  head()
+```
+
+NB: to rename a column, we can use rename(). Here we'll rename the column STANDARD_DEVIATION into SD.          
+```{r}
+df_fly_spots %>% 
+  rename(SD = STANDARD_DEVIATION)
+```
+
+
+## Select
+
+We can select only the columns we need with the function select(). For instance, let's select the columns Label, MEAN_INTENSITY, and STANDARD_DEVIATION. NB: in the following chunks, your task is to replace the "MISSING_PART" by the right code. You can find the solutions in the /solutions folder.
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots %>% 
+  select(MISSING_PART) %>% 
+  head()
+```
+
+In practice, it can be interesting to select only a few columns for printing in a report. To display a table in a report, we can use the kable() function from the knitr library.
+
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots %>% 
+  select(MISSING_PART) %>% 
+  head() %>% 
+  knitr::kable()
+```
+
+
+We can also remove one or several column with select(). Let's get rid of the column CELL_DIVISION_TIME.      
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots <- df_fly_spots %>% 
+  select(MISSING_PART)
+```
+
+
+## Plots  
+
+We would like to see the distribution of the mean fluorescence intensity (per spot) over the whole dataset.     
+```{r, eval=FALSE, echo=FALSE}
+ggplot(df_fly_spots, aes(x = MISSING_PART)) +
+  geom_histogram(bins = 15) +
+  custom_plot_theme()
+```
+
+
+We see roughly a few values around 30000 and all the others are close to 32000.
+
+Let's plot now the mean intensity in function of the time (=FRAME). FRAME is a character variable. It has to be converted to numeric first. We will create a new column called FRAME_num containing the FRAME variable as numeric.       
+NB: In the chunk below, the plot was added directly to the chain of commands using the "%>%" (pipe) symbol. All the commands belonging to the plot are still added with a "+".      
+
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots %>% 
+  mutate(FRAME_num = as.numeric(MISSING_PART)) %>% 
+ggplot(aes(x=FRAME_num, y=MISSING_PART))+
+  geom_point() +
+  geom_smooth() +
+  custom_plot_theme()
+```
+
+
+With this plot, we don't see much variation of the mean fluorescence intensity over time.
+
+## Filter
+
+We'll now filter the rows and keep only the spots that have a mean fluorescence intensity above 32900 to see if we see better the variations of the mean fluorescence intensity over time.        
+          
+```{r, eval=FALSE, echo=FALSE}
+filtered_df_fly_embryo <- df_fly_spots %>% 
+  filter(MEAN_INTENSITY > MISSING_PART) %>% 
+  mutate(FRAME_num = as.numeric(MISSING_PART)) 
+
+ggplot(filtered_df_fly_embryo, aes(x=MISSING_PART, y=MISSING_PART))+
+  geom_point() +
+  geom_jitter() +
+  geom_smooth() +
+  xlab("Frame") +
+  ylab("Mean intensity")
+  custom_plot_theme()
+```
+
+         
+We see now some variations around frame 12 to 15. Interestingly, this seems to correspond to a period where most of the cells are dividing in the embryo. In the part below, we'll visualise the number of spots over time.          
+
+## Group by and summarise
+
+We'll count the number of spots by FRAME and store the result in a column called "nb". For this, we need to group the spots by FRAME and count them using the function n().   
+
+```{r, eval=FALSE, echo=FALSE}
+nb_nuclei <- df_fly_spots %>% 
+  group_by(MISSING_PART) %>% 
+  summarise(MISSING_PART = n())
+```
+
+
+View the content of nb_nuclei using one of the functions above.    
+```{r, eval=FALSE, echo=FALSE}
+nb_nuclei %>% 
+  MISSING_PART
+```
+
+
+## Left join
+
+We would like to add the count of spots stored in nb_nuclei to the main dataframe df_fly_spots. For this, we will use a left_join() and do the join on the column FRAME. We will then display the number of nuclei in function of the FRAME.     
+
+```{r, eval=FALSE, echo=FALSE}
+df_fly_spots2 <- left_join(MISSING_PART, nb_nuclei, by = MISSING_PART)
+
+ggplot(MISSING_PART, aes(x = as.numeric(FRAME), y = MISSING_PART)) + 
+  geom_point() +
+  geom_line() +
+  xlab("FRAME") + 
+  ylab("Number of nuclei") +
+  custom_plot_theme()
+```
+
+
+

@@ -1,0 +1,42 @@
+---
+title: "Bonus_Install"
+author: "Marion Louveaux"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## How to install the packages we will use for the course
+
+This part is just a reminder on how to install the packages on your own computer. For the training school 10 (TS10), the packages are already installed.
+
+## Installing the tidyverse packages 
+
+To install a package, the command is: 
+```{r, eval=FALSE}
+install.packages("NAME_of_the_package")
+```
+Or from the Rstudio menu: `Tools -> Install packages...`      
+
+For instance:        
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+N.B.: I set the eval preference of the chunks to FALSE to prevent accidental execution of the chunks if you knit this .Rmd. Installation of a package can take a couple of minutes.              
+
+## Installing the mamut2r package
+
+The package I developped is not available on CRAN yet and hence cannot be installed using the install.packages() function. This package is on GitHub. As written in the readme of my package (https://github.com/marionlouveaux/mamut2r), the command to install it is:       
+
+```{r, eval=FALSE}
+devtools::install_github("marionlouveaux/mamut2r")
+```
+
+You can set `build_vignettes = TRUE` to knit the vignettes.        
+
+
+
