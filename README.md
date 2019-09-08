@@ -14,6 +14,15 @@ This session covers the **basics of the R programming language** in the context 
 The session covers the basics of data exploration and visualisation, but no statistics. It starts with an introduction to the **Rstudio IDE** (console, script, help and plot viewer, history...) and to the **Rmarkdown** format (notion of chunk, how to “knit”...). Regarding the R language itself, it focuses on the basics (how to execute a command, assign a variable, install and load a library), **how to manipulate data** (import data as dataframe, select columns, filter rows...) and **how to create plots** with ggplot2. The second part of the session is focused on **more advanced exploration and analysis** of the tracking data in their spatio-temporal context with two R packages: [{mamut2r}](https://github.com/marionlouveaux/mamut2r), for the import of tracking data from the Fiji plugin [TrackMate](https://imagej.net/TrackMate) and the visualisation of tracks, and [{cellviz3d}](https://github.com/marionlouveaux/cellviz3d), for the 3D+time visualisation of the tracking data.       
 
 
+## Installation
+
+Install the following packages: 
+```r
+install.packages(c("magrittr", "dplyr", "readr", "here", "ggplot2", "ggthemes", "knitr",  "XML", "devtools")         
+devtools::install_github("marionlouveaux/cellviz3d")       
+devtools::install_github("marionlouveaux/mamut2r")
+```          
+
 ## Acknowledgements
 
 - **Local organisers**: Aymeric d'Hérouel and Andreas Girod         
