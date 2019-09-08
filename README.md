@@ -1,12 +1,14 @@
-# NEUBIAS_TS10_Rintro
-
-<img src="https://raw.githubusercontent.com/marionlouveaux/NEUBIAS_TS10_Rintro/master/slides/images/bioimage_analysis_workflow.png" width="100%" />
-
 ## Introduction to R for bioimage analysis
 
 This repository contains the datasets, the scripts, solutions and slides needed for the 3h course "Introduction to R for bioimage analysis" of the [NEUBIAS Training School 10 for Early Career Investigators given in Luxembourg in 2019](http://eubias.org/NEUBIAS/training-schools/eci/ts10-luxembourg-2019/) given by Marion Louveaux.     
 
 The format of this session was inspired by the [Little Miss Tidyverse workshop](https://github.com/rladiessydney/littlemisstidyverse) given by Danielle Navarro for the Rladies Sydney. 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/marionlouveaux/NEUBIAS_TS10_Rintro/master/slides/images/bioimage_analysis_workflow.png" width="75%" />
+</p>
+
+
 
 ## Acknowledgements
 
