@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NEUBIAS - TS10</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Marion Louveaux" />
+    <meta name="date" content="2019-02-04" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css_neubias.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# NEUBIAS - TS10
+## Introduction to R for bioimage analysis
+### Marion Louveaux
+### 2019-02-04
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+  &lt;div class="my-info"&gt;
+      &lt;a href="https://marionlouveaux.fr/"&gt;marionlouveaux.fr&lt;/a&gt;
+      &lt;a href="https://twitter.com/MarionLouveaux"&gt;@MarionLouveaux&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="my-logo"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;       
+
+---
+
+# Bioimage analysis includes data analysis
+&lt;img src="images/bioimage_analysis_workflow.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Why using a programming langage to perform data analysis?
+
+.pull-left60[
+&lt;img src="images/non_tidy_data.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right40[
+- get reproducible analyses
+- share with others   
+- re-use later       
+- keep raw data raw      
+]
+---
+
+# Get Started: R studio and .Rproj
+&lt;img src="images/Rstudio.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.remark[ Double clic on **TS10_Rintro.Rproj** ]
+
+---
+
+# Get Started: R studio and .Rproj
+&lt;img src="images/Rstudio2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.remark[  Double clic on **TS10_Rintro.Rproj** ]
+---
+
+# 00_Getting started: R markdown
+
+&lt;img src="images/Rmarkdown.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.remark[
+Bottom right panel of Rstudio: `Files -&gt; scripts`      
+Click on `00_GettingStarted.Rmd`      
+]
+---
+
+# 00_Getting started: R markdown
+&lt;img src="images/Rmarkdown2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.remark[
+Bottom right panel of Rstudio: `Files -&gt; scripts`      
+Click on `00_GettingStarted.Rmd`      
+]
+---
+
+# Why using an R project and Rmarkdown
+
+We aim at avoiding this situation:     
+&lt;img src="images/irreproducible.gif" style="display: block; margin: auto;" /&gt;
+
+&gt; http://phdcomics.com/comics/archive.php?comicid=1689
+---
+
+# 01_Rbasics
+
+### Execute a command     
+
+`ctrl + enter` to execute a command.      
+NB: `cmd + enter` on Mac.
+
+### Assign a value to a variable
+
+
+```r
+my_age &lt;- 29
+```
+my_age is a **variable**.
+We **assign** 29 to my_age.
+
+.remark[
+Bottom right panel of Rstudio: `Files -&gt; scripts`      
+Click on `00_GettingStarted.Rmd`      
+]
+---
+
+# 02_Exercise1
+
+.pull-left[
+We'll work on the data from the tracking session:
+- developing Drosophila embryo, carrying a histone-RFP marker      
+- timelapse (31 frames, frame delay = 30 seconds)          
+- pixel size 0.52x0.52x2.5 µm3        
+]
+
+.pull-right[
+&lt;img src="images/AVG_division_timelapse.gif" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+.remark[
+**All data are** available **in the .Rproj folder "/datasets/fly_embryo".**
+]
+---
+
+# 02_Exercise1: Goals
+
+To be able to produce a plot like this one...    
+
+
+
+&lt;img src="TS10_Rintro_files/figure-html/unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: Goals
+
+... using only a few lines of code
+
+
+```r
+df_fly_spots &lt;- read_csv(here(
+  "datasets/fly_embryo/division_timelapse_spot_stats.csv"
+))
+
+nb_nuclei &lt;- df_fly_spots %&gt;% 
+  group_by(FRAME) %&gt;% 
+  summarise(nb = n())
+
+df_fly_spots2 &lt;- left_join(df_fly_spots, nb_nuclei) 
+
+ggplot(df_fly_spots2, aes(FRAME, nb)) + 
+  geom_point() +
+  geom_line() +
+  xlab("FRAME") + 
+  ylab("Number of nuclei") +
+  custom_plot_theme()
+```
+---
+
+
+# 02_Exercise1: librairies
+
+R uses additionnal librairies, that must be loaded for each script using `library()`.      
+
+```r
+library(readr)
+```
+
+Here, we will mainly work with
+- `readr` (to read csv)         
+- `dplyr` (to wrangle data)           
+- `magrittr` (%&gt;% symbol)          
+- and `ggplot2` (to plot)     
+---
+
+
+# 02_Exercise1: read and view a dataframe
+
+To read a .csv file, we will use the read_csv function from readr. This function reads the content of the csv and gives an object called "tibble"" (= a sort of dataframe) as an output.    
+
+```r
+dataframe &lt;- read_csv("path_to_my_csv.csv")
+```
+
+We can visualise the content of the dataframe using head() or View().
+
+```r
+dataframe %&gt;% 
+  head()
+
+# To see the whole table (be careful with big dataframes!!)
+dataframe %&gt;% 
+  View()
+```
+---
+
+# 02_Exercise1: the pipe symbol %&gt;%
+
+The pipe symbol is used **to chain instructions**, as you would do for a cooking recipe:     
+
+.pull-left60[
+
+```r
+omelette_with_chives &lt;- egg %&gt;% 
+  crack(add_seasoning) %&gt;% 
+  beat() %&gt;% 
+  cook(add_chives)
+```
+]
+
+.pull-right40[
+&lt;img src="images/piping_piped.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+&gt; From: http://perso.ens-lyon.fr/lise.vaudor/utiliser-des-pipes-pour-enchainer-des-instructions/
+---
+
+# 02_Exercise1: mutate()
+
+mutate() = to add a new column
+
+
+```r
+result &lt;- data %&gt;% 
+  mutate(new_column_name = expression)
+```
+
+&lt;img src="images/mutate.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: select()
+
+select() = to select or exclude **columns** in the dataframe
+
+
+```r
+result &lt;- data %&gt;% 
+  select(column1_to_keep, column2_to_keep, column3_to_keep)
+
+result &lt;- data %&gt;% 
+  select(-column_to_exclude)
+```
+
+&lt;img src="images/select.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: Plots with ggplot2   
+
+&lt;img src="images/ggplot.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.remark[
+**/!\ Do not mix %&gt;% and +** (specific to plots) **/!\**
+]
+---
+
+# 02_Exercise1: filter()
+
+filter() = to filter **rows** on one or several conditions
+
+
+```r
+result &lt;- data %&gt;% 
+filter(condition1)
+
+result &lt;- data %&gt;% 
+filter(condition1 &amp; condition2) # AND
+
+result &lt;- data %&gt;% 
+filter(condition1 | condition2) # OR
+```
+
+&lt;img src="images/filter.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+
+# 02_Exercise1: summarise()
+
+summarise() = to **resume** a column into one value (mean, median, sum...)
+
+```r
+result &lt;- data %&gt;%
+  summarise(new_column_name = function(column_of_interest))
+```
+
+&lt;img src="images/summarise.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: group_by()
+
+group_by() = to group the rows according to a categorical variable.
+
+```r
+result &lt;- data %&gt;%
+  group_by(categorical_variable_of_interest)
+```
+
+&lt;img src="images/group_by.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: group_by() and summarise()
+
+
+```r
+result &lt;- data %&gt;%
+  group_by(categorical_variable_of_interest) %&gt;% 
+  summarise(new_column_name = function(column_of_interest))
+```
+
+&lt;img src="images/group_by_summarise.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: left_join()
+
+left_join() = to combine tables, with the left table as reference.    
+
+
+```r
+result &lt;- data1 %&gt;%
+  left_join(data2, by = "column_name")
+```
+
+&lt;img src="images/left_join.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+# 02_Exercise1: Plots with ggplot2 - reminder   
+
+&lt;img src="images/ggplot.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.remark[
+**/!\ Do not mix %&gt;% and +** (specific to plots) **/!\**
+]
+---
+
+# 03_Find_help: in R/Rstudio
+
+## Package documentation
+
+```r
+# Package documentation
+help(package = "NAME_of_PACKAGE")
+
+# Help for a specific function
+?NAME_of_FUNCTION
+```
+
+
+## Rstudio cheatsheets 
+.pull-left[
+&lt;img src="images/cheatsheet_Rstudio.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="images/Rmarkdown_cheatsheet.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# 03_Find_help: Online or not
+
+**Google**, **StackOverflow**, **Twitter**...         
+
+but also      
+
+.pull-left60[
+**R meetups** (R ladies, UseR groups...): 
+- https://www.meetup.com         
+- https://rladies.org/     
+
+**Conferences**:     
+useR! (Toulouse, July 9-12 2019)         
+SatRday (Paris, 23rd of February 2019)       
+
+**Remote groups**:        
+- R ladies remote group        
+- French speaking remote group "Grrr"        
+]
+
+.pull-right40[
+&lt;img src="images/logo_conferences_remoteGroups.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+.remark[
+Dont' forget to use a **reprex** = reproducible example.     
+]
+---
+
+# 04_Exercise2: Goals
+
+- Apply knowledge from Exercise1       
+- Learn how to navigate through the documentation of a package             
+
+
+.pull-left60[
+Be aware that this part of the session relies on two librairies (`mamut2r` and `cellviz3d`) that are still under development.
+]
+       
+.pull-right40[
+&lt;img src="images/underconstrution.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+&lt;br&gt; 
+&gt; mamut2r and cellviz3d are available on GitHub:
+- https://github.com/marionlouveaux/mamut2r         
+- https://github.com/marionlouveaux/cellviz3d          
+See Bonus_Install.Rmd for instructions on how to install these librairies on your own computer.         
+---
+
+# 04_Exercise2 
+
+Display mean fluorescence intensity in 3D+time.       
+
+&lt;img src="images/plotlySpotsall_fluo_intensity_non_filtered_data.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+The lower values of fluorescent intensity are close to the border of the sample.       
+---
+
+# 04_Exercise2
+
+Display **filtered** mean fluorescence intensity in 3D+time. 
+
+&lt;img src="images/plotlySpotsall_fluo_intensity_filtered_data.png" width="100%" style="display: block; margin: auto;" /&gt;
+Mean fluorescence intensity tends to be lower right after a division.      
+---
+
+# 04_Exercise2
+
+Compute and display the division status (ready to divide or not) in 3D+time.     
+
+&lt;img src="images/plotlySpotsall_division_status.png" width="100%" style="display: block; margin: auto;" /&gt;
+We can spot simultaneous divisions.      
+---
+
+# 04_Exercise2
+
+Compute and display a **metric to look for false detected spot** based on the change of mean fluorescence intensity over a division.      
+
+&lt;img src="images/plotlySpotsall_false_detected_divisions.png" width="100%" style="display: block; margin: auto;" /&gt;
+---
+
+# 05_Going_further
+
+## Citation
+Don't forget to cite R and the packages you use!
+
+
+```r
+# To get R citation
+citation()
+```
+
+
+```r
+# To get citation for the ggplot2 package
+citation(package = "ggplot2")
+```
+---
+
+# Acknowledgements
+
+- **Local organisers**: Aymeric d'Hérouel and Andreas Girod         
+- **NEUBIAS chair**: Julien Colombelli          
+- **TS10 and TS11 organisers and helpers**: Kota Miura, Jean-Yves Tinevez, Gaby Martins, Jonas Øgaard, Joyce Kao, Fabrice Cordelières, Ignacio Arganda-Carreras         
+- **Data**: Robert Haase          
+- **mamut2r and cellviz3d help**: Sébastien Rochette, Friederike Preu, Mike Smith
+- **MaMuT help**: Jean-Yves Tinevez, Tobias Pietzsch, John Bogovic
+
+&lt;br&gt;
+
+The format of this session was inspired by the Little Miss Tidyverse workshop given by Danielle Navarro for the Rladies Sydney (https://github.com/rladiessydney/littlemisstidyverse).
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

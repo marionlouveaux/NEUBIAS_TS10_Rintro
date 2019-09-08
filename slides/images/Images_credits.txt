@@ -1,0 +1,16 @@
+Images credits:
+
+non_tidy_data.png: ThinkR https://rtask.thinkr.fr/
+
+irreproducible.gif: PhD comics http://phdcomics.com/comics/archive.php?comicid=1689
+
+bioimage_analysis_workflow.png: Marion Louveaux (using images from https://www.pngkey.com/detail/u2q8y3y3u2e6y3o0_drosophila-drawing-easy-fruit-fly-drawing/, logo of image analysis softwares and data analysis, https://commons.wikimedia.org/wiki/File:Microscope_icon_(black).svg, https://fr.pngtree.com/freepng/cartoon-hand---painted-business-data-analysis_3208659.html, Arabidopsis seedling from 2014 Ristova et al. Natural Variation of Root Traits: From Development to Nutrient Uptake Plant Physiol and 2016 Louveaux et al. "Cell division plane orientation based on tensile stress in Arabidopsis thaliana" PNAS)
+
+grrr.png (grrr logo): Julien Barnier
+
+underconstruction logo: https://pixabay.com/en/under-construction-construction-sign-2408060/
+
+fly embryo images: Robert Haase, MPI-CBG Dresden
+
+piping_piped.jpg: Lise Vaudor, http://perso.ens-lyon.fr/lise.vaudor/utiliser-des-pipes-pour-enchainer-des-instructions/
+
