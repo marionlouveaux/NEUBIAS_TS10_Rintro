@@ -1,12 +1,12 @@
 # NEUBIAS_TS10_Rintro
 
-<img src="https://raw.githubusercontent.com/marionlouveaux/NEUBIAS_TS10_Rintro/blob/master/slides/images/bioimage_analysis_workflow.png" width="100%" />
+<img src="https://raw.githubusercontent.com/marionlouveaux/NEUBIAS_TS10_Rintro/master/slides/images/bioimage_analysis_workflow.png" width="100%" />
 
 ## Introduction to R for bioimage analysis
 
 This repository contains the datasets, the scripts, solutions and slides needed for the 3h course "Introduction to R for bioimage analysis" of the [NEUBIAS Training School 10 for Early Career Investigators given in Luxembourg in 2019](http://eubias.org/NEUBIAS/training-schools/eci/ts10-luxembourg-2019/) given by Marion Louveaux.     
 
-The format of this session was inspired by the Little Miss Tidyverse workshop given by Danielle Navarro for the Rladies Sydney (https://github.com/rladiessydney/littlemisstidyverse). 
+The format of this session was inspired by the [Little Miss Tidyverse workshop](https://github.com/rladiessydney/littlemisstidyverse) given by Danielle Navarro for the Rladies Sydney. 
 
 ## Acknowledgements
 
@@ -20,8 +20,8 @@ The format of this session was inspired by the Little Miss Tidyverse workshop gi
 ## Links
 
 R packages available on GitHub:
-[mamut2r](https://github.com/marionlouveaux/mamut2r) 
-[cellviz3d](https://github.com/marionlouveaux/cellviz3d)
+- [mamut2r](https://github.com/marionlouveaux/mamut2r)           
+- [cellviz3d](https://github.com/marionlouveaux/cellviz3d)      
 
 Tracking data (.xml and .csv) were generated with the Fiji plugin [TrackMate](https://imagej.net/TrackMate). 
 
