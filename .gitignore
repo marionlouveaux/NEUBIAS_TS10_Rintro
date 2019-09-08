@@ -4,5 +4,6 @@
 .Ruserdata
 .DS_Store
 ._.DS_Store
-*._
+._*
 datasets/fly_embryo/division_timelapse.tif
+
