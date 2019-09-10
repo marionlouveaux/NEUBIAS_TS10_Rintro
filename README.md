@@ -1,4 +1,4 @@
-[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa][![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3404169.svg)](https://doi.org/10.5281/zenodo.3404169)
 
 ## Introduction to R for bioimage analysis
 
