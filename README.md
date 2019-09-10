@@ -1,3 +1,5 @@
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
 ## Introduction to R for bioimage analysis
 
 This repository contains the datasets, the scripts, solutions and slides needed for the 3h course "Introduction to R for bioimage analysis" given by Marion Louveaux during the [NEUBIAS Training School 10 for Early Career Investigators in Luxembourg in 2019](http://eubias.org/NEUBIAS/training-schools/eci/ts10-luxembourg-2019/).     
@@ -13,6 +15,14 @@ The **definition of bioimage analysis** given on the website of [NEUBIAS](http:/
 This session covers the **basics of the R programming language** in the context of a bioimage analysis workflow. It aims at getting started with the analysis of data extracted from one or several images, here **tracking data**. Tracking data were extracted using the Fiji plugin [TrackMate](https://imagej.net/TrackMate) and are available in `/datasets/fly_embryo/`.      
 The session covers the basics of data exploration and visualisation, but no statistics. It starts with an introduction to the **Rstudio IDE** (console, script, help and plot viewer, history...) and to the **Rmarkdown** format (notion of chunk, how to “knit”...). Regarding the R language itself, it focuses on the basics (how to execute a command, assign a variable, install and load a library), **how to manipulate data** (import data as dataframe, select columns, filter rows...) and **how to create plots** with ggplot2. The second part of the session is focused on **more advanced exploration and analysis** of the tracking data in their spatio-temporal context with two R packages: [{mamut2r}](https://github.com/marionlouveaux/mamut2r), for the import of tracking data from the Fiji plugin [TrackMate](https://imagej.net/TrackMate) and the visualisation of tracks, and [{cellviz3d}](https://github.com/marionlouveaux/cellviz3d), for the 3D+time visualisation of the tracking data.       
 
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
 
 ## Installation
 
